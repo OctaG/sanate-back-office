@@ -8,6 +8,10 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
+import IconButton from '@mui/material/IconButton';
+import Button from '@mui/material/Button';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+import Box from '@mui/material/Box';
 
 // Generate Order Data
 function createData(id, name, type, amount, price) {
@@ -32,9 +36,14 @@ export default function Orders() {
   return (
     <React.Fragment>
       <Paper sx={{ p: 5, display: 'flex', flexDirection: 'column' }}>
-        <Typography variant="h4" sx={{marginBottom:3}}>
+        <Typography variant="h4">
           Productos
         </Typography>
+        <Box textAlign='right' sx={{marginBottom:2}}>
+          <Button color="secondary" aria-label="add" endIcon={<AddCircleIcon/>}>
+            Añadir producto
+          </Button>
+        </Box>
         <Table size="small">
           <TableHead>
             <TableRow>
