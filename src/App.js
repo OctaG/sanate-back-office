@@ -3,10 +3,11 @@ import Orders from "./components/Orders.js"
 
 import Products from "./pages/Products.js"
 import EditProduct from "./pages/EditProduct.js"
+import UploadProduct from "./pages/UploadProduct.js"
 
 function App() {
   return (
-    <EditProduct/>
+    <UploadProduct/>
   );
 }
 export default App;
