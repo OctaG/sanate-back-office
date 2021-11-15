@@ -1,8 +1,9 @@
 import NavBar from "./components/NavBar.js"
+import Orders from "./components/Orders.js"
 
 function App() {
   return (
-    <NavBar/>
+    <Orders/>
   );
 }
 export default App;
