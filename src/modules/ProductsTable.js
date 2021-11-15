@@ -31,34 +31,39 @@ function preventDefault(event) {
 export default function Orders() {
   return (
     <React.Fragment>
-      <Table size="small">
-        <TableHead>
-          <TableRow>
-            <TableCell>ID</TableCell>
-            <TableCell>Producto</TableCell>
-            <TableCell>Tipo</TableCell>
-            <TableCell>Cantidad disponible</TableCell>
-            <TableCell>Precio</TableCell>
-            <TableCell align="right">Detalles</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row) => (
-            <TableRow key={row.id}>
-              <TableCell>{row.id}</TableCell>
-              <TableCell>{row.name}</TableCell>
-              <TableCell>{row.type}</TableCell>
-              <TableCell>{row.amount}</TableCell>
-              <TableCell>{`$${row.price}`}</TableCell>
-              <TableCell align="right">
-                <Link color="primary" href="#" onClick={preventDefault}>
-                Ver detalles
-                </Link>
-              </TableCell>
+      <Paper sx={{ p: 5, display: 'flex', flexDirection: 'column' }}>
+        <Typography variant="h4" sx={{marginBottom:3}}>
+          Productos
+        </Typography>
+        <Table size="small">
+          <TableHead>
+            <TableRow>
+              <TableCell>ID</TableCell>
+              <TableCell>Producto</TableCell>
+              <TableCell>Tipo</TableCell>
+              <TableCell>Cantidad disponible</TableCell>
+              <TableCell>Precio</TableCell>
+              <TableCell align="right">Detalles</TableCell>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+          </TableHead>
+          <TableBody>
+            {rows.map((row) => (
+              <TableRow key={row.id}>
+                <TableCell>{row.id}</TableCell>
+                <TableCell>{row.name}</TableCell>
+                <TableCell>{row.type}</TableCell>
+                <TableCell>{row.amount}</TableCell>
+                <TableCell>{`$${row.price}`}</TableCell>
+                <TableCell align="right">
+                  <Link color="primary" href="#" onClick={preventDefault}>
+                  Ver detalles
+                  </Link>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </Paper>
     </React.Fragment>
   );
 }

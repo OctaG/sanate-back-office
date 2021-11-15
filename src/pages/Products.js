@@ -8,12 +8,14 @@ import ProductsTable from '../modules/ProductsTable.js';
 export default function Orders() {
   return (
     <React.Fragment>
-      <Paper sx={{ p: 5, display: 'flex', flexDirection: 'column' }}>
-        <Typography variant="h2" sx={{marginBottom:2}}>
-          Productos
-        </Typography>
-        <ProductsTable/>
-      </Paper>
+      <Typography
+        variant="h2"
+        align="center"
+        sx={{fontWeight:"bold", marginTop:10, marginBottom:5}}
+      >
+        Administrar productos
+      </Typography>
+      <ProductsTable/>
     </React.Fragment>
   );
 }
