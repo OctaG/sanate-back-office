@@ -28,6 +28,8 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import Badge from '@mui/material/Badge';
 
 import ProductsTable from "../modules/ProductsTable.js"
+import EditProduct from "../pages/EditProduct.js"
+import UploadProduct from "../pages/UploadProduct.js"
 import Orders from "./Orders.js"
 
 import {
@@ -203,6 +205,12 @@ export default function NavBar() {
            </Route>
            <Route path="/orders">
             <Orders/>
+           </Route>
+           <Route path="/edit-product">
+            <EditProduct/>
+           </Route>
+           <Route path="/add-product">
+            <UploadProduct/>
            </Route>
           </Switch>
         </Box>

@@ -16,6 +16,8 @@ import Box from '@mui/material/Box';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 
+import { useHistory } from "react-router-dom";
+
 // Generate Order Data
 function createData(id, name, type, amount, price) {
   return { id, name, type, amount, price };
@@ -23,21 +25,21 @@ function createData(id, name, type, amount, price) {
 
 const rows = [
   createData(
-    '123456',
+    '1',
     'Aspirina',
     'Medicamento',
     50,
     312.44,
   ),
   createData(
-    '123456',
+    '2',
     'Aspirina',
     'Medicamento',
     50,
     312.44,
   ),
   createData(
-    '123456',
+    '3',
     'Aspirina',
     'Medicamento',
     50,
@@ -50,6 +52,21 @@ function preventDefault(event) {
 }
 
 export default function Orders() {
+  let history = useHistory();
+
+  function addProduct(){
+    history.push("/add-product");
+  }
+
+  function goToEdit(row){
+    console.log(row);
+    history.push("/edit-product");
+  }
+
+  function deleteProduct(row){
+    console.log(row);
+  }
+
   return (
     <React.Fragment>
       <Paper sx={{ p: 5, display: 'flex', flexDirection: 'column' }}>
@@ -57,7 +74,12 @@ export default function Orders() {
           Productos
         </Typography>
         <Box textAlign='right' sx={{marginBottom:2}}>
-          <Button color="secondary" aria-label="add" endIcon={<AddCircleIcon/>}>
+          <Button
+            color="secondary"
+            aria-label="add"
+            endIcon={<AddCircleIcon/>}
+            onClick={addProduct}
+          >
             Añadir producto
           </Button>
         </Box>
@@ -82,8 +104,12 @@ export default function Orders() {
                 <TableCell>{`$${row.price}`}</TableCell>
                 <TableCell align="right">
                   <DropdownButton id="dropdown-basic-button" title="">
-                    <Dropdown.Item href="#/action-1">Editar</Dropdown.Item>
-                    <Dropdown.Item href="#/action-2">Eliminar</Dropdown.Item>
+                    <Dropdown.Item onClick={() => goToEdit(row)}>
+                      Editar
+                    </Dropdown.Item>
+                    <Dropdown.Item onClick={() => deleteProduct(row)}>
+                      Eliminar
+                    </Dropdown.Item>
                   </DropdownButton>
                 </TableCell>
               </TableRow>
