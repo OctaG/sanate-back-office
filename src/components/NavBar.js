@@ -38,7 +38,8 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
+  Link,
+  useHistory
 } from "react-router-dom";
 
 const drawerWidth = 240;
@@ -124,6 +125,9 @@ const drawerIcons = [
 ]
 
 export default function NavBar() {
+
+    let history = useHistory();
+
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
@@ -135,94 +139,96 @@ export default function NavBar() {
     setOpen(false);
   };
 
+  function goToOrders(){
+    history.push("/orders")
+  }
+
   return (
-    <Router>
-      <Box sx={{ display: 'flex' }}>
-        <CssBaseline />
-        <AppBar position="fixed" open={open}>
-          <Toolbar>
-            <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              onClick={handleDrawerOpen}
-              edge="start"
-              sx={{
-                marginRight: '36px',
-                ...(open && { display: 'none' }),
-              }}
-            >
-              <MenuIcon />
-            </IconButton>
-            <Typography variant="h6" noWrap component="div">
-              Dashboard
-            </Typography>
-            <IconButton color="inherit" sx={{marginLeft: "auto"}}>
-              <Badge badgeContent={4} color="secondary">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
-          </Toolbar>
-        </AppBar>
-        <Drawer variant="permanent" open={open}>
-          <DrawerHeader>
-            <IconButton onClick={handleDrawerClose}>
-              {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
-            </IconButton>
-          </DrawerHeader>
-          <Divider />
-          <List>
-            {menuOptions.map((text, index) => (
-              <Link to={menuOptions[index][1]} style={{color:"black", textDecoration:"none" }}>
-                <ListItem button key={text[0]}>
-                  <ListItemIcon>
-                    {drawerIcons[index]}
-                  </ListItemIcon>
-                  <ListItemText primary={text[0]}/>
-                </ListItem>
-              </Link>
-            ))}
-          </List>
-          <Divider />
-          {open?
-            <ListSubheader align="center"> Reportes </ListSubheader>
-            :
-            null
-          }
-          <List>
-            {['Octubre', 'Q3 2021', '2020'].map((text, index) => (
-              <ListItem button key={text}>
+    <Box sx={{ display: 'flex' }}>
+      <CssBaseline />
+      <AppBar position="fixed" open={open}>
+        <Toolbar>
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            onClick={handleDrawerOpen}
+            edge="start"
+            sx={{
+              marginRight: '36px',
+              ...(open && { display: 'none' }),
+            }}
+          >
+            <MenuIcon />
+          </IconButton>
+          <Typography variant="h6" noWrap component="div">
+            Dashboard
+          </Typography>
+          <IconButton color="inherit" sx={{marginLeft: "auto"}} onClick={goToOrders}>
+            <Badge badgeContent={4} color="secondary">
+              <NotificationsIcon />
+            </Badge>
+          </IconButton>
+        </Toolbar>
+      </AppBar>
+      <Drawer variant="permanent" open={open}>
+        <DrawerHeader>
+          <IconButton onClick={handleDrawerClose}>
+            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+          </IconButton>
+        </DrawerHeader>
+        <Divider />
+        <List>
+          {menuOptions.map((text, index) => (
+            <Link to={menuOptions[index][1]} style={{color:"black", textDecoration:"none" }}>
+              <ListItem button key={text[0]}>
                 <ListItemIcon>
-                  <DescriptionIcon/>
+                  {drawerIcons[index]}
                 </ListItemIcon>
-                <ListItemText primary={text} />
+                <ListItemText primary={text[0]}/>
               </ListItem>
-            ))}
-          </List>
-        </Drawer>
-        <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-          <DrawerHeader />
-          <Switch>
-           <Route path="/products">
-            <ProductsTable/>
-           </Route>
-           <Route path="/orders">
-            <Orders/>
-           </Route>
-           <Route path="/edit-product">
-            <EditProduct/>
-           </Route>
-           <Route path="/add-product">
-            <UploadProduct/>
-           </Route>
-           <Route path="/order-details">
-            <OrderDetails/>
-           </Route>
-           <Route path="/coordinate">
-            <CoordinateDelivery/>
-           </Route>
-          </Switch>
-        </Box>
+            </Link>
+          ))}
+        </List>
+        <Divider />
+        {open?
+          <ListSubheader align="center"> Reportes </ListSubheader>
+          :
+          null
+        }
+        <List>
+          {['Octubre', 'Q3 2021', '2020'].map((text, index) => (
+            <ListItem button key={text}>
+              <ListItemIcon>
+                <DescriptionIcon/>
+              </ListItemIcon>
+              <ListItemText primary={text} />
+            </ListItem>
+          ))}
+        </List>
+      </Drawer>
+      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+        <DrawerHeader />
+        <Switch>
+         <Route path="/products">
+          <ProductsTable/>
+         </Route>
+         <Route path="/orders">
+          <Orders/>
+         </Route>
+         <Route path="/edit-product">
+          <EditProduct/>
+         </Route>
+         <Route path="/add-product">
+          <UploadProduct/>
+         </Route>
+         <Route path="/order-details">
+          <OrderDetails/>
+         </Route>
+         <Route path="/coordinate">
+          <CoordinateDelivery/>
+         </Route>
+        </Switch>
       </Box>
-    </Router>
+    </Box>
   );
 }
