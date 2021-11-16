@@ -1,15 +1,30 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 
 import Grid from '@mui/material/Grid';
 
 import Product from '../components/Product.js'
 
-export default function SpacingGrid() {
+import axios from 'axios';
+
+export default function SpacingGrid(params) {
+  const [rows, setRows] = useState([]);
+  console.log(params.orderID);
+  useEffect(() => {
+    const rows = [];
+    axios.get(
+      `http://ec2-54-197-25-167.compute-1.amazonaws.com:3000/getProductsOfOrder`,
+       { params: { id: params.orderID } }
+    )
+         .then(res => {
+           console.log(res.data.Item.products);
+           setRows(res.data.Item.products);
+         });
+  }, []);
   return(
     <Grid container rowSpacing={4} columnSpacing={4}>
-      {[0, 1, 2, 3].map((value) => (
+      {rows.map((value) => (
         <Grid key={value} item>
-          <Product/>
+          <Product id={value}/>
         </Grid>
       ))}
     </Grid>

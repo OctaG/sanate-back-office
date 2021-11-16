@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 
 import Link from '@mui/material/Link';
 import Table from '@mui/material/Table';
@@ -14,91 +14,70 @@ import DropdownButton from 'react-bootstrap/DropdownButton';
 
 import { useHistory } from "react-router-dom";
 
-// Generate Order Data
-function createData(id, date, name, shipTo, paymentMethod, amount) {
-  return { id, date, name, shipTo, paymentMethod, amount };
-}
-
-const rows = [
-  createData(
-    0,
-    '16 Mar, 2019',
-    'Elvis Presley',
-    'Tupelo, MS',
-    'En tránsito',
-    312.44,
-  ),
-  createData(
-    1,
-    '16 Mar, 2019',
-    'Paul McCartney',
-    'London, UK',
-    'Entregado',
-    866.99,
-  ),
-  createData(2, '16 Mar, 2019', 'Tom Scholz', 'Boston, MA', 'Entregado', 100.81),
-  createData(
-    3,
-    '16 Mar, 2019',
-    'Michael Jackson',
-    'Gary, IN',
-    'Cancelado',
-    654.39,
-  ),
-];
-
-function preventDefault(event) {
-  event.preventDefault();
-}
+import axios from 'axios';
 
 export default function Orders() {
 
   let history = useHistory();
 
+  const [rows, setRows] = useState([]);
+
+  useEffect(() => {
+    const rows = [];
+    axios.get(`http://ec2-54-197-25-167.compute-1.amazonaws.com:3000/getAllOrders`)
+         .then(res => {
+           for(let elem in res.data.Items){
+             rows.push(res.data.Items[elem]);
+           }
+           setRows(rows);
+         });
+  }, []);
+
   function goToOrderDetails(row){
-    console.log(row);
-    history.push("/order-details")
+    history.push("/order-details", {data: row})
   }
   return (
     <React.Fragment>
-    <Paper sx={{ p: 5, display: 'flex', flexDirection: 'column' }}>
-    <Typography variant="h2" sx={{marginBottom:2}}>
-      Ordenes
-    </Typography>
-      <Table size="small">
-        <TableHead>
-          <TableRow>
-            <TableCell>Fecha</TableCell>
-            <TableCell>Cliente</TableCell>
-            <TableCell>Dirección</TableCell>
-            <TableCell>Estado</TableCell>
-            <TableCell>Total de venta</TableCell>
-            <TableCell align="right">Detalles</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row) => (
-            <TableRow key={row.id}>
-              <TableCell>{row.date}</TableCell>
-              <TableCell>{row.name}</TableCell>
-              <TableCell>{row.shipTo}</TableCell>
-              <TableCell>{row.paymentMethod}</TableCell>
-              <TableCell>{`$${row.amount}`}</TableCell>
-              <TableCell align="right">
-                <DropdownButton id="dropdown-basic-button" title="">
-                  <Dropdown.Item onClick={() => goToOrderDetails(row)}>
-                    Preparar ordenes
-                  </Dropdown.Item>
-                  <Dropdown.Item>
-                    Cancelar orden
-                  </Dropdown.Item>
-                </DropdownButton>
-              </TableCell>
+      <Paper sx={{ p: 5, display: 'flex', flexDirection: 'column' }}>
+      <Typography variant="h2" sx={{marginBottom:2}}>
+        Ordenes
+      </Typography>
+        <Table size="small">
+          <TableHead>
+            <TableRow>
+              <TableCell>ID</TableCell>
+              <TableCell>Fecha</TableCell>
+              <TableCell>Cliente</TableCell>
+              <TableCell>Dirección</TableCell>
+              <TableCell>Total de compra</TableCell>
+              <TableCell>Estado</TableCell>
+              <TableCell align="right">Acciones</TableCell>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-      </Paper>
-    </React.Fragment>
+          </TableHead>
+          <TableBody>
+            {rows.map((row) => (
+              <TableRow key={row.sanate_ordenes}>
+                <TableCell>{row.sanate_ordenes}</TableCell>
+                <TableCell>{row.date}</TableCell>
+                <TableCell>{row.customer}</TableCell>
+                <TableCell>{row.address}</TableCell>
+                <TableCell>{row.price}</TableCell>
+                <TableCell>{row.state}</TableCell>
+                <TableCell align="right">
+                  <DropdownButton id="dropdown-basic-button" title="">
+                    <Dropdown.Item onClick={() => goToOrderDetails(row)}>
+                      Preparar ordenes
+                    </Dropdown.Item>
+                    <Dropdown.Item>
+                      Cancelar orden
+                    </Dropdown.Item>
+                  </DropdownButton>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+        </Paper>
+      </React.Fragment>
   );
 }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -7,7 +7,23 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
-export default function MediaCard() {
+import axios from 'axios';
+
+export default function MediaCard(params) {
+  const [rows, setRows] = useState([]);
+  console.log("Product ID: " + params.id[0]);
+  console.log("Cantidad: " + params.id);
+  useEffect(() => {
+    const rows = [];
+    axios.get(
+      `http://ec2-54-197-25-167.compute-1.amazonaws.com:3000/getProductInfo`,
+       { params: { id: params.id[0] } }
+    )
+         .then(res => {
+          console.log(res.data.Item);
+          setRows(res.data.Item)
+         });
+  }, []);
   return (
     <Card sx={{ maxWidth: 350 }}>
       <CardMedia
@@ -18,16 +34,16 @@ export default function MediaCard() {
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          Aspirina
+        {rows.name}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          ID: 106537893
+          ID: {rows.id}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          Sección: Fármcos sin receta
+          Sección: {rows.section}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          Cantidad: 2
+          Cantidad: {params.id[1]}
         </Typography>
       </CardContent>
     </Card>

@@ -20,6 +20,8 @@ import TableRow from '@mui/material/TableRow';
 
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 
+import axios from 'axios';
+
 const Input = styled('input')({
   display: 'none',
 });
@@ -32,109 +34,130 @@ export default function EditProductForm() {
   const [images, setImages] = useState([])
   const [rows, setRows] = useState([])
 
+  const handleSubmit = (e) => {
+    const data = new FormData(e.currentTarget);
+    e.preventDefault();
+    console.log(data.get('name'));
+    console.log(data.get('description'));
+    console.log(data.get('price'));
+    axios({
+      method: "post",
+      url: "http://ec2-54-197-25-167.compute-1.amazonaws.com:3000/uploadProduct",
+      params: {
+        id: "3",
+        name: data.get('name'),
+        section: data.get('description'),
+        price: data.get('price'),
+      },
+      headers:{ "Content-Type": "application/json" }
+    });
+  };
+
   return (
     <React.Fragment>
       <Container component="main" maxWidth="md">
         <Paper variant="outlined" sx={{ my: 5, p: 10}}>
-          <Typography variant="h4" sx={{marginBottom:5}}>
-            Información del producto
-          </Typography>
-          <Grid container spacing={3} sx={{marginBottom:5}}>
-            <Grid item xs={12}>
-              <TextField
-                required
-                id="name"
-                name="name"
-                label="Nombre del producto"
-                fullWidth
-                defaultValue={name}
-                variant="standard"
-              />
+          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+            <Typography variant="h4" sx={{marginBottom:5}}>
+              Información del producto
+            </Typography>
+            <Grid container spacing={3} sx={{marginBottom:5}}>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  id="name"
+                  name="name"
+                  label="Nombre del producto"
+                  fullWidth
+                  defaultValue={name}
+                  variant="standard"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  id="description"
+                  name="description"
+                  label="Descripción"
+                  fullWidth
+                  defaultValue={description}
+                  variant="standard"
+                  multiline
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  id="price"
+                  name="price"
+                  label="Precio"
+                  fullWidth
+                  defaultValue={price}
+                  InputProps={{
+                    startAdornment: <InputAdornment position="start">$</InputAdornment>,
+                  }}
+                  variant="standard"
+                />
+              </Grid>
             </Grid>
-            <Grid item xs={12}>
-              <TextField
-                required
-                id="description"
-                name="description"
-                label="Descripción"
-                fullWidth
-                defaultValue={description}
-                variant="standard"
-                multiline
-              />
+            <Typography variant="h4" sx={{marginBottom:5}}>
+              Imágenes
+            </Typography>
+            <Grid container spacing={3}>
+              <ImageList sx={{ width: 700, height: 150, marginLeft:3 }} cols={4} rowHeight={164}>
+                 {images.map((item) => (
+                   <ImageListItem key={item.img}>
+                     <img
+                       src={`${item.img}?w=164&h=164&fit=crop&auto=format`}
+                       srcSet={`${item.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
+                       alt={item.title}
+                     />
+                   </ImageListItem>
+                 ))}
+               </ImageList>
             </Grid>
-            <Grid item xs={12}>
-              <TextField
-                required
-                id="price"
-                name="price"
-                label="Precio"
-                fullWidth
-                defaultValue={price}
-                InputProps={{
-                  startAdornment: <InputAdornment position="start">$</InputAdornment>,
-                }}
-                variant="standard"
-              />
-            </Grid>
-          </Grid>
-          <Typography variant="h4" sx={{marginBottom:5}}>
-            Imágenes
-          </Typography>
-          <Grid container spacing={3}>
-            <ImageList sx={{ width: 700, height: 150, marginLeft:3 }} cols={4} rowHeight={164}>
-               {images.map((item) => (
-                 <ImageListItem key={item.img}>
-                   <img
-                     src={`${item.img}?w=164&h=164&fit=crop&auto=format`}
-                     srcSet={`${item.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
-                     alt={item.title}
-                   />
-                 </ImageListItem>
-               ))}
-             </ImageList>
-          </Grid>
-          <Box textAlign='right' sx={{marginBottom:2}}>
-            <label htmlFor="contained-button-file">
-               <Input accept="image/*" id="contained-button-file" multiple type="file" />
-               <Button color="secondary" component="span" endIcon={<AddCircleIcon/>}>
-                 Nueva imágen
-               </Button>
-             </label>
-          </Box>
-          <Typography variant="h4" sx={{marginBottom:5}}>
-            Inventario
-          </Typography>
-          <Table size="small">
-            <TableHead>
-              <TableRow>
-                <TableCell>Sucursal</TableCell>
-                <TableCell>Cantidad</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {rows.map((row) => (
-                <TableRow key={row.id}>
-                  <TableCell>{row.store}</TableCell>
-                  <TableCell>
-                    <TextField
-                      required
-                      id="amount"
-                      name="amount"
-                      label=""
-                      fullWidth
-                      defaultValue={row.amount}
-                      variant="standard"
-                    />
-                  </TableCell>
+            <Box textAlign='right' sx={{marginBottom:2}}>
+              <label htmlFor="contained-button-file">
+                 <Input accept="image/*" id="contained-button-file" multiple type="file" />
+                 <Button color="secondary" component="span" endIcon={<AddCircleIcon/>}>
+                   Nueva imágen
+                 </Button>
+               </label>
+            </Box>
+            <Typography variant="h4" sx={{marginBottom:5}}>
+              Inventario
+            </Typography>
+            <Table size="small">
+              <TableHead>
+                <TableRow>
+                  <TableCell>Sucursal</TableCell>
+                  <TableCell>Cantidad</TableCell>
                 </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-          <Box textAlign='right' sx={{marginTop:10, marginBottom:2}}>
-           <Button color="secondary" variant="contained" fullWidth>
-             Actualizar
-           </Button>
+              </TableHead>
+              <TableBody>
+                {rows.map((row) => (
+                  <TableRow key={row.id}>
+                    <TableCell>{row.store}</TableCell>
+                    <TableCell>
+                      <TextField
+                        required
+                        id="amount"
+                        name="amount"
+                        label=""
+                        fullWidth
+                        defaultValue={row.amount}
+                        variant="standard"
+                      />
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+            <Box textAlign='right' sx={{marginTop:10, marginBottom:2}}>
+             <Button type="submit" color="secondary" variant="contained" fullWidth>
+               Añadir
+             </Button>
+            </Box>
           </Box>
          </Paper>
         </Container>
