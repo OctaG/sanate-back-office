@@ -30,6 +30,7 @@ import Badge from '@mui/material/Badge';
 import ProductsTable from "../modules/ProductsTable.js"
 import EditProduct from "../pages/EditProduct.js"
 import UploadProduct from "../pages/UploadProduct.js"
+import CoordinateDelivery from "../pages/CoordinateDelivery.js"
 import Orders from "./Orders.js"
 import OrderDetails from "../pages/OrderDetails.js"
 
@@ -215,6 +216,9 @@ export default function NavBar() {
            </Route>
            <Route path="/order-details">
             <OrderDetails/>
+           </Route>
+           <Route path="/coordinate">
+            <CoordinateDelivery/>
            </Route>
           </Switch>
         </Box>
