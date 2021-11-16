@@ -12,6 +12,8 @@ import Typography from '@mui/material/Typography';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 
+import { useHistory } from "react-router-dom";
+
 // Generate Order Data
 function createData(id, date, name, shipTo, paymentMethod, amount) {
   return { id, date, name, shipTo, paymentMethod, amount };
@@ -50,6 +52,13 @@ function preventDefault(event) {
 }
 
 export default function Orders() {
+
+  let history = useHistory();
+
+  function goToOrderDetails(row){
+    console.log(row);
+    history.push("/order-details")
+  }
   return (
     <React.Fragment>
     <Paper sx={{ p: 5, display: 'flex', flexDirection: 'column' }}>
@@ -77,8 +86,8 @@ export default function Orders() {
               <TableCell>{`$${row.amount}`}</TableCell>
               <TableCell align="right">
                 <DropdownButton id="dropdown-basic-button" title="">
-                  <Dropdown.Item>
-                    Ver detalles
+                  <Dropdown.Item onClick={() => goToOrderDetails(row)}>
+                    Preparar ordenes
                   </Dropdown.Item>
                   <Dropdown.Item>
                     Cancelar orden
