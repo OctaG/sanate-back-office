@@ -1,4 +1,5 @@
 import React from 'react';
+
 import Link from '@mui/material/Link';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -7,6 +8,9 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
+
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
 
 // Generate Order Data
 function createData(id, date, name, shipTo, paymentMethod, amount) {
@@ -72,9 +76,14 @@ export default function Orders() {
               <TableCell>{row.paymentMethod}</TableCell>
               <TableCell>{`$${row.amount}`}</TableCell>
               <TableCell align="right">
-                <Link color="primary" href="#" onClick={preventDefault}>
-                Ver detalles
-                </Link>
+                <DropdownButton id="dropdown-basic-button" title="">
+                  <Dropdown.Item>
+                    Ver detalles
+                  </Dropdown.Item>
+                  <Dropdown.Item>
+                    Cancelar orden
+                  </Dropdown.Item>
+                </DropdownButton>
               </TableCell>
             </TableRow>
           ))}
