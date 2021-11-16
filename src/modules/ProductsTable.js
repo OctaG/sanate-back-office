@@ -13,12 +13,29 @@ import Button from '@mui/material/Button';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import Box from '@mui/material/Box';
 
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
+
 // Generate Order Data
 function createData(id, name, type, amount, price) {
   return { id, name, type, amount, price };
 }
 
 const rows = [
+  createData(
+    '123456',
+    'Aspirina',
+    'Medicamento',
+    50,
+    312.44,
+  ),
+  createData(
+    '123456',
+    'Aspirina',
+    'Medicamento',
+    50,
+    312.44,
+  ),
   createData(
     '123456',
     'Aspirina',
@@ -36,7 +53,7 @@ export default function Orders() {
   return (
     <React.Fragment>
       <Paper sx={{ p: 5, display: 'flex', flexDirection: 'column' }}>
-        <Typography variant="h4">
+        <Typography variant="h2">
           Productos
         </Typography>
         <Box textAlign='right' sx={{marginBottom:2}}>
@@ -52,7 +69,7 @@ export default function Orders() {
               <TableCell>Tipo</TableCell>
               <TableCell>Cantidad disponible</TableCell>
               <TableCell>Precio</TableCell>
-              <TableCell align="right">Detalles</TableCell>
+              <TableCell align="right">Acciones</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -64,9 +81,10 @@ export default function Orders() {
                 <TableCell>{row.amount}</TableCell>
                 <TableCell>{`$${row.price}`}</TableCell>
                 <TableCell align="right">
-                  <Link color="primary" href="#" onClick={preventDefault}>
-                  Ver detalles
-                  </Link>
+                  <DropdownButton id="dropdown-basic-button" title="">
+                    <Dropdown.Item href="#/action-1">Editar</Dropdown.Item>
+                    <Dropdown.Item href="#/action-2">Eliminar</Dropdown.Item>
+                  </DropdownButton>
                 </TableCell>
               </TableRow>
             ))}

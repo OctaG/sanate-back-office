@@ -27,7 +27,7 @@ import StoreIcon from '@mui/icons-material/Store';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import Badge from '@mui/material/Badge';
 
-import Products from "../pages/Products.js"
+import ProductsTable from "../modules/ProductsTable.js"
 import Orders from "./Orders.js"
 
 import {
@@ -199,7 +199,7 @@ export default function NavBar() {
           <DrawerHeader />
           <Switch>
            <Route path="/products">
-            <Products/>
+            <ProductsTable/>
            </Route>
            <Route path="/orders">
             <Orders/>
