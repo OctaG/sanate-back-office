@@ -42,7 +42,7 @@ export default function EditProductForm() {
     console.log(data.get('price'));
     axios({
       method: "post",
-      url: "http://ec2-54-197-25-167.compute-1.amazonaws.com:3000/uploadProduct",
+      url: "http://ec2-34-239-232-157.compute-1.amazonaws.com:3000/uploadProduct",
       params: {
         id: "3",
         name: data.get('name'),

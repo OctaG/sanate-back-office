@@ -24,7 +24,7 @@ export default function Orders() {
 
   useEffect(() => {
     const rows = [];
-    axios.get(`http://ec2-54-197-25-167.compute-1.amazonaws.com:3000/getAllOrders`)
+    axios.get(`http://ec2-34-239-232-157.compute-1.amazonaws.com:3000/getAllOrders`)
          .then(res => {
            for(let elem in res.data.Items){
              rows.push(res.data.Items[elem]);

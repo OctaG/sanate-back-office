@@ -12,7 +12,7 @@ export default function SpacingGrid(params) {
   useEffect(() => {
     const rows = [];
     axios.get(
-      `http://ec2-54-197-25-167.compute-1.amazonaws.com:3000/getProductsOfOrder`,
+      `http://ec2-34-239-232-157.compute-1.amazonaws.com:3000/getProductsOfOrder`,
        { params: { id: params.orderID } }
     )
          .then(res => {

@@ -16,7 +16,7 @@ export default function MediaCard(params) {
   useEffect(() => {
     const rows = [];
     axios.get(
-      `http://ec2-54-197-25-167.compute-1.amazonaws.com:3000/getProductInfo`,
+      `http://ec2-34-239-232-157.compute-1.amazonaws.com:3000/getProductInfo`,
        { params: { id: params.id[0] } }
     )
          .then(res => {
