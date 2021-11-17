@@ -89,7 +89,7 @@ export default function Products() {
               <TableRow key={row.id}>
                 <TableCell>{row.id}</TableCell>
                 <TableCell>{row.pname}</TableCell>
-                <TableCell>{row.section}</TableCell>
+                <TableCell>{row.description}</TableCell>
                 <TableCell>{`$${row.price}`}</TableCell>
                 <TableCell align="right">
                   <DropdownButton id="dropdown-basic-button" title="">

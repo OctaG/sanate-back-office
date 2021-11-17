@@ -17,8 +17,11 @@ import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import Modal from '@mui/material/Modal';
 
 import AddCircleIcon from '@mui/icons-material/AddCircle';
+
+import ActionFinishedModal from '../components/ActionFinishedModal.js'
 
 import axios from 'axios';
 
@@ -26,9 +29,23 @@ const Input = styled('input')({
   display: 'none',
 });
 
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
+
+
 export default function ProductForm(params) {
 
   const [images, setImages] = useState([]);
+  const [open, setOpen] = React.useState(false);
 
   const handleSubmit = (e) => {
     const data = new FormData(e.currentTarget);
@@ -51,11 +68,18 @@ export default function ProductForm(params) {
         inventory: Object.fromEntries(inventory),
       },
       headers:{ "Content-Type": "application/json" }
+    }).then(() => {
+      setOpen(true);
     });
   };
 
   return (
     <React.Fragment>
+      {open?
+        <ActionFinishedModal/>
+        :
+        null
+      }
       <Container component="main" maxWidth="md">
         <Paper variant="outlined" sx={{ my: 5, p: 10}}>
           <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
