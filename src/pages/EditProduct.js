@@ -4,7 +4,13 @@ import Typography from '@mui/material/Typography';
 
 import ProductForm from '../modules/ProductForm.js';
 
+import { useLocation } from "react-router-dom";
+
 export default function Orders() {
+
+  const location = useLocation();
+  const product = location.state.data;
+
   return (
     <React.Fragment>
       <Typography
@@ -14,7 +20,7 @@ export default function Orders() {
       >
         Editar producto
       </Typography>
-      <ProductForm/>
+      <ProductForm product={product}/>
     </React.Fragment>
   );
 }

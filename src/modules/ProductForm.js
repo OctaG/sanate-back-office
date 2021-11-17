@@ -26,28 +26,29 @@ const Input = styled('input')({
   display: 'none',
 });
 
-export default function EditProductForm() {
+export default function ProductForm(params) {
 
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
-  const [price, setPrice] = useState(0);
-  const [images, setImages] = useState([])
-  const [rows, setRows] = useState([])
+  const [images, setImages] = useState([]);
 
   const handleSubmit = (e) => {
     const data = new FormData(e.currentTarget);
+    const inventory = [];
+
     e.preventDefault();
-    console.log(data.get('name'));
-    console.log(data.get('description'));
-    console.log(data.get('price'));
+
+    Object.keys(params.product.inventory).map((key) => {
+      inventory.push([key, data.get('amount_'+ key)]);
+    });
+
     axios({
       method: "post",
-      url: "http://ec2-34-239-232-157.compute-1.amazonaws.com:3000/uploadProduct",
+      url: "http://ec2-34-239-232-157.compute-1.amazonaws.com:3000/updateProduct",
       params: {
-        id: "3",
+        id: params.product.id,
         name: data.get('name'),
-        section: data.get('description'),
+        description: data.get('description'),
         price: data.get('price'),
+        inventory: Object.fromEntries(inventory),
       },
       headers:{ "Content-Type": "application/json" }
     });
@@ -69,7 +70,7 @@ export default function EditProductForm() {
                   name="name"
                   label="Nombre del producto"
                   fullWidth
-                  defaultValue={name}
+                  defaultValue={params.product.pname}
                   variant="standard"
                 />
               </Grid>
@@ -80,7 +81,7 @@ export default function EditProductForm() {
                   name="description"
                   label="Descripción"
                   fullWidth
-                  defaultValue={description}
+                  defaultValue={params.product.description}
                   variant="standard"
                   multiline
                 />
@@ -92,7 +93,7 @@ export default function EditProductForm() {
                   name="price"
                   label="Precio"
                   fullWidth
-                  defaultValue={price}
+                  defaultValue={params.product.price}
                   InputProps={{
                     startAdornment: <InputAdornment position="start">$</InputAdornment>,
                   }}
@@ -135,17 +136,17 @@ export default function EditProductForm() {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {rows.map((row) => (
-                  <TableRow key={row.id}>
-                    <TableCell>{row.store}</TableCell>
+                {Object.entries(params.product.inventory).map((row) => (
+                  <TableRow key={row[0]}>
+                    <TableCell>{row[0]}</TableCell>
                     <TableCell>
                       <TextField
                         required
-                        id="amount"
-                        name="amount"
+                        id={"amount_"+row[0]}
+                        name={"amount_"+row[0]}
                         label=""
                         fullWidth
-                        defaultValue={row.amount}
+                        defaultValue={row[1]}
                         variant="standard"
                       />
                     </TableCell>

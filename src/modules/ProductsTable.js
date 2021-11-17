@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 
 import Link from '@mui/material/Link';
 import Table from '@mui/material/Table';
@@ -18,41 +18,32 @@ import DropdownButton from 'react-bootstrap/DropdownButton';
 
 import { useHistory } from "react-router-dom";
 
-// Generate Order Data
-function createData(id, name, type, amount, price) {
-  return { id, name, type, amount, price };
-}
+import axios from 'axios';
 
-const rows = [
-  createData(
-    '1',
-    'Aspirina',
-    'Medicamento',
-    50,
-    312.44,
-  ),
-  createData(
-    '2',
-    'Aspirina',
-    'Medicamento',
-    50,
-    312.44,
-  ),
-  createData(
-    '3',
-    'Aspirina',
-    'Medicamento',
-    50,
-    312.44,
-  ),
-];
+
 
 function preventDefault(event) {
   event.preventDefault();
 }
 
-export default function Orders() {
-  let history = useHistory();
+export default function Products() {
+
+  const history = useHistory();
+  const [rows, setRows] = useState([]);
+
+  useEffect(() => {
+    const rows = [];
+    axios.get(
+      `http://ec2-34-239-232-157.compute-1.amazonaws.com:3000/getAllProducts`
+    )
+         .then(res => {
+           for(let index in res.data.Items){
+             let product = res.data.Items[index]
+             rows.push(product);
+           }
+           setRows(rows);
+         });
+  }, []);
 
   function addProduct(){
     history.push("/add-product");
@@ -60,7 +51,7 @@ export default function Orders() {
 
   function goToEdit(row){
     console.log(row);
-    history.push("/edit-product");
+    history.push("/edit-product", {data:row});
   }
 
   function deleteProduct(row){
@@ -89,7 +80,6 @@ export default function Orders() {
               <TableCell>ID</TableCell>
               <TableCell>Producto</TableCell>
               <TableCell>Tipo</TableCell>
-              <TableCell>Cantidad disponible</TableCell>
               <TableCell>Precio</TableCell>
               <TableCell align="right">Acciones</TableCell>
             </TableRow>
@@ -98,9 +88,8 @@ export default function Orders() {
             {rows.map((row) => (
               <TableRow key={row.id}>
                 <TableCell>{row.id}</TableCell>
-                <TableCell>{row.name}</TableCell>
-                <TableCell>{row.type}</TableCell>
-                <TableCell>{row.amount}</TableCell>
+                <TableCell>{row.pname}</TableCell>
+                <TableCell>{row.section}</TableCell>
                 <TableCell>{`$${row.price}`}</TableCell>
                 <TableCell align="right">
                   <DropdownButton id="dropdown-basic-button" title="">
