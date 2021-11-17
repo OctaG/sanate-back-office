@@ -56,6 +56,16 @@ export default function Products() {
 
   function deleteProduct(row){
     console.log(row);
+    axios({
+      method: "post",
+      url: "http://ec2-34-239-232-157.compute-1.amazonaws.com:3000/deleteProduct",
+      params: {
+        id: row.id,
+      },
+      headers:{ "Content-Type": "application/json" }
+    }).then(() => {
+      window.location.reload(false);
+    });
   }
 
   return (
