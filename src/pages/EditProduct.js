@@ -20,7 +20,7 @@ export default function Orders() {
       >
         Editar producto
       </Typography>
-      <ProductForm product={product}/>
+      <ProductForm edit product={product}/>
     </React.Fragment>
   );
 }

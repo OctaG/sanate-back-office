@@ -22,8 +22,8 @@ export default function SpacingGrid(params) {
   }, []);
   return(
     <Grid container rowSpacing={4} columnSpacing={4}>
-      {rows.map((value) => (
-        <Grid key={value} item>
+      {Object.entries(rows).map((value) => (
+        <Grid key={value[0]} item>
           <Product id={value}/>
         </Grid>
       ))}

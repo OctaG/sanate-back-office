@@ -12,7 +12,7 @@ import axios from 'axios';
 export default function MediaCard(params) {
   const [rows, setRows] = useState([]);
   console.log("Product ID: " + params.id[0]);
-  console.log("Cantidad: " + params.id);
+  console.log("Cantidad: " + params.id[1]);
   useEffect(() => {
     const rows = [];
     axios.get(
@@ -25,7 +25,7 @@ export default function MediaCard(params) {
          });
   }, []);
   return (
-    <Card sx={{ maxWidth: 350 }}>
+    <Card sx={{ minWidth: 250, maxWidth: 350 }}>
       <CardMedia
         component="img"
         height="140"

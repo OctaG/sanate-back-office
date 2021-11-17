@@ -49,7 +49,7 @@ export default function ProductForm(params) {
 
   const sucursales = [["Polanco"], ["Interlomas"]]
 
-  const handleSubmit = (e) => {
+  const editProduct = (e) => {
     const data = new FormData(e.currentTarget);
     const inventory = [];
 
@@ -64,7 +64,7 @@ export default function ProductForm(params) {
       url: "http://ec2-34-239-232-157.compute-1.amazonaws.com:3000/updateProduct",
       params: {
         id: params.product.id,
-        name: data.get('name'),
+        pname: data.get('name'),
         description: data.get('description'),
         price: data.get('price'),
         inventory: Object.fromEntries(inventory),
@@ -75,6 +75,33 @@ export default function ProductForm(params) {
     });
   };
 
+  const createProduct = (e) => {
+    const data = new FormData(e.currentTarget);
+    const inventory = [];
+
+    e.preventDefault();
+
+    sucursales.map((key) => {
+      inventory.push([key, data.get('amount_'+ key)]);
+    });
+
+    axios({
+      method: "post",
+      url: "http://ec2-34-239-232-157.compute-1.amazonaws.com:3000/putProduct",
+      params: {
+        id: (Math.random() + 1).toString(36).substring(7), //https://stackoverflow.com/questions/1349404/
+        pname: data.get('name'),
+        description: data.get('description'),
+        price: data.get('price'),
+        inventory: Object.fromEntries(inventory),
+      },
+      headers:{ "Content-Type": "application/json" }
+    }).then(() => {
+      setOpen(true);
+    });
+  };
+
+
   return (
     <React.Fragment>
       {open?
@@ -84,42 +111,44 @@ export default function ProductForm(params) {
       }
       <Container component="main" maxWidth="md">
         <Paper variant="outlined" sx={{ my: 5, p: 10}}>
-          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+          <Box
+            component="form"
+            noValidate
+            onSubmit={params.edit? editProduct : createProduct}
+              sx={{ mt: 3 }}
+          >
             <Typography variant="h4" sx={{marginBottom:5}}>
               Información del producto
             </Typography>
             <Grid container spacing={3} sx={{marginBottom:5}}>
               <Grid item xs={12}>
                 <TextField
-                  required
                   id="name"
                   name="name"
                   label="Nombre del producto"
                   fullWidth
-                  defaultValue={params.product? params.product.pname : ""}
+                  defaultValue={params.edit? params.product.pname : ""}
                   variant="standard"
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                  required
                   id="description"
                   name="description"
                   label="Descripción"
                   fullWidth
-                  defaultValue={params.product? params.product.description : ""}
+                  defaultValue={params.edit? params.product.description : ""}
                   variant="standard"
                   multiline
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                  required
                   id="price"
                   name="price"
                   label="Precio"
                   fullWidth
-                  defaultValue={params.product? params.product.price : ""}
+                  defaultValue={params.edit? params.product.price : ""}
                   InputProps={{
                     startAdornment: <InputAdornment position="start">$</InputAdornment>,
                   }}
@@ -162,17 +191,16 @@ export default function ProductForm(params) {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {(params.product? Object.entries(params.product.inventory) : sucursales).map((row) => (
+                {(params.edit? Object.entries(params.product.inventory) : sucursales).map((row) => (
                   <TableRow key={row[0]}>
                     <TableCell>{row[0]}</TableCell>
                     <TableCell>
                       <TextField
-                        required
                         id={"amount_"+row[0]}
                         name={"amount_"+row[0]}
                         label=""
                         fullWidth
-                        defaultValue={ params.product? row[1] : 0}
+                        defaultValue={ params.edit? row[1] : 0}
                         variant="standard"
                       />
                     </TableCell>
@@ -181,9 +209,9 @@ export default function ProductForm(params) {
               </TableBody>
             </Table>
             <Box textAlign='right' sx={{marginTop:10, marginBottom:2}}>
-             <Button type="submit" color="secondary" variant="contained" fullWidth>
-               Añadir
-             </Button>
+               <Button type="submit" color="secondary" variant="contained" fullWidth>
+                 {params.edit? "Editar" : "Crear"}
+               </Button>
             </Box>
           </Box>
          </Paper>

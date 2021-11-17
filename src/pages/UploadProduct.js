@@ -14,7 +14,7 @@ export default function UploadProduct() {
       >
         Añadir producto
       </Typography>
-      <ProductForm/>
+      <ProductForm create/>
     </React.Fragment>
   );
 }

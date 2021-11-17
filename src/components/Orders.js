@@ -40,9 +40,10 @@ export default function Orders() {
   function cancelOrder(row){
     axios({
       method: "post",
-      url: "http://ec2-34-239-232-157.compute-1.amazonaws.com:3000/cancelOrder",
+      url: "http://ec2-34-239-232-157.compute-1.amazonaws.com:3000/changeOrderStatus",
       params: {
         id: row.sanate_ordenes,
+        status: "Cancelled"
       },
       headers:{ "Content-Type": "application/json" }
     }).then(() => {
@@ -80,7 +81,7 @@ export default function Orders() {
                 <TableCell align="right">
                   <DropdownButton id="dropdown-basic-button" title="">
                     <Dropdown.Item onClick={() => goToOrderDetails(row)}>
-                      Preparar ordenes
+                      Preparar orden
                     </Dropdown.Item>
                     <Dropdown.Item onClick={() => cancelOrder(row)}>
                       Cancelar orden
