@@ -34,8 +34,22 @@ export default function Orders() {
   }, []);
 
   function goToOrderDetails(row){
-    history.push("/order-details", {data: row})
+    history.push("/order-details", {data: row});
   }
+
+  function cancelOrder(row){
+    axios({
+      method: "post",
+      url: "http://ec2-34-239-232-157.compute-1.amazonaws.com:3000/cancelOrder",
+      params: {
+        id: row.sanate_ordenes,
+      },
+      headers:{ "Content-Type": "application/json" }
+    }).then(() => {
+      window.location.reload(false);
+    });
+  }
+
   return (
     <React.Fragment>
       <Paper sx={{ p: 5, display: 'flex', flexDirection: 'column' }}>
@@ -61,14 +75,14 @@ export default function Orders() {
                 <TableCell>{row.date}</TableCell>
                 <TableCell>{row.customer}</TableCell>
                 <TableCell>{row.address}</TableCell>
-                <TableCell>{row.price}</TableCell>
-                <TableCell>{row.state}</TableCell>
+                <TableCell>{row.total}</TableCell>
+                <TableCell>{row.orderState}</TableCell>
                 <TableCell align="right">
                   <DropdownButton id="dropdown-basic-button" title="">
                     <Dropdown.Item onClick={() => goToOrderDetails(row)}>
                       Preparar ordenes
                     </Dropdown.Item>
-                    <Dropdown.Item>
+                    <Dropdown.Item onClick={() => cancelOrder(row)}>
                       Cancelar orden
                     </Dropdown.Item>
                   </DropdownButton>

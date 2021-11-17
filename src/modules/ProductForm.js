@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { styled } from '@mui/material/styles';
 
@@ -47,6 +47,8 @@ export default function ProductForm(params) {
   const [images, setImages] = useState([]);
   const [open, setOpen] = React.useState(false);
 
+  const sucursales = [["Polanco"], ["Interlomas"]]
+
   const handleSubmit = (e) => {
     const data = new FormData(e.currentTarget);
     const inventory = [];
@@ -94,7 +96,7 @@ export default function ProductForm(params) {
                   name="name"
                   label="Nombre del producto"
                   fullWidth
-                  defaultValue={params.product.pname}
+                  defaultValue={params.product? params.product.pname : ""}
                   variant="standard"
                 />
               </Grid>
@@ -105,7 +107,7 @@ export default function ProductForm(params) {
                   name="description"
                   label="Descripción"
                   fullWidth
-                  defaultValue={params.product.description}
+                  defaultValue={params.product? params.product.description : ""}
                   variant="standard"
                   multiline
                 />
@@ -117,7 +119,7 @@ export default function ProductForm(params) {
                   name="price"
                   label="Precio"
                   fullWidth
-                  defaultValue={params.product.price}
+                  defaultValue={params.product? params.product.price : ""}
                   InputProps={{
                     startAdornment: <InputAdornment position="start">$</InputAdornment>,
                   }}
@@ -160,7 +162,7 @@ export default function ProductForm(params) {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {Object.entries(params.product.inventory).map((row) => (
+                {(params.product? Object.entries(params.product.inventory) : sucursales).map((row) => (
                   <TableRow key={row[0]}>
                     <TableCell>{row[0]}</TableCell>
                     <TableCell>
@@ -170,7 +172,7 @@ export default function ProductForm(params) {
                         name={"amount_"+row[0]}
                         label=""
                         fullWidth
-                        defaultValue={row[1]}
+                        defaultValue={ params.product? row[1] : 0}
                         variant="standard"
                       />
                     </TableCell>

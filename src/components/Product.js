@@ -34,7 +34,7 @@ export default function MediaCard(params) {
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-        {rows.name}
+        {rows.pname}
         </Typography>
         <Typography variant="body2" color="text.secondary">
           ID: {rows.id}

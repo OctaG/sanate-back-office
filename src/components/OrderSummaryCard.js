@@ -22,7 +22,7 @@ export default function OrderSummaryCard(props) {
         Enviar a: {order.address}
       </Typography>
       <Typography align="left" variant="h5" gutterBottom>
-        Total: ${order.price}
+        Total: ${order.total}
       </Typography>
       <Button color="secondary" variant="contained" fullWidth>
         Orden lista
