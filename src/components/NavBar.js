@@ -34,6 +34,7 @@ import CoordinateDelivery from "../pages/CoordinateDelivery.js"
 import Orders from "./Orders.js"
 import OrderDetails from "../pages/OrderDetails.js"
 import Home from "../pages/Home.js"
+import Inventory from "../pages/Inventory.js"
 
 import logo from '../assets/logo.png';
 
@@ -237,6 +238,9 @@ export default function NavBar() {
          </Route>
          <Route path="/coordinate">
           <CoordinateDelivery/>
+         </Route>
+         <Route path="/inventory">
+          <Inventory/>
          </Route>
          <Route path="/">
           <Home/>

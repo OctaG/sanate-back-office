@@ -54,6 +54,11 @@ export default function Products(props) {
     history.push("/edit-product", {data:row});
   }
 
+  function goToInventory(row){
+    console.log(row);
+    history.push("/inventory", {data:row});
+  }
+
   function deleteProduct(row){
     console.log(row);
     axios({
@@ -103,6 +108,9 @@ export default function Products(props) {
                 <TableCell>{`$${row.price}`}</TableCell>
                 <TableCell align="right">
                   <DropdownButton id="dropdown-basic-button" title="">
+                    <Dropdown.Item onClick={() => goToInventory(row)}>
+                      Ver inventario
+                    </Dropdown.Item>
                     <Dropdown.Item onClick={() => goToEdit(row)}>
                       Editar
                     </Dropdown.Item>
