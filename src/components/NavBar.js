@@ -7,7 +7,6 @@ import MuiAppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import List from '@mui/material/List';
 import CssBaseline from '@mui/material/CssBaseline';
-import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -16,16 +15,13 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
 import DescriptionIcon from '@mui/icons-material/Description';
 import ListSubheader from '@mui/material/ListSubheader';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import LocalHospitalIcon from '@mui/icons-material/LocalHospital';
-import StoreIcon from '@mui/icons-material/Store';
-import NotificationsIcon from '@mui/icons-material/Notifications';
-import Badge from '@mui/material/Badge';
+//import StoreIcon from '@mui/icons-material/Store';
+//import NotificationsIcon from '@mui/icons-material/Notifications';
 import Button from '@mui/material/Button';
 
 import ProductTable from "../components/ProductTable.js"
@@ -43,11 +39,9 @@ import firebase from "../utils/firebase.js";
 import logo from '../assets/logo.png';
 
 import {
-  BrowserRouter as Router,
   Switch,
   Route,
   Link,
-  useHistory
 } from "react-router-dom";
 
 const drawerWidth = 240;
@@ -121,7 +115,7 @@ const menuOptions = [
   ['Resumen', '/'],
   ['Ordenes', 'orders'],
   ['Productos', 'products'],
-  /*['Coordinar entregas', 'coordinate']*/,
+  /*['Coordinar entregas', 'coordinate']*/
 ]
 
 
@@ -129,12 +123,10 @@ const drawerIcons = [
   <DashboardIcon/>,
   <ShoppingCartIcon/>,
   <LocalHospitalIcon/>,
-  /*<StoreIcon/>*/,
+  /*<StoreIcon/>*/
 ]
 
 export default function NavBar() {
-
-  let history = useHistory();
 
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -146,10 +138,6 @@ export default function NavBar() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-
-  function goToOrders(){
-    history.push("/orders")
-  }
 
   function logOut(){
     firebase.auth().signOut();
@@ -175,6 +163,7 @@ export default function NavBar() {
           <img
             style={{height: 50, width: 500, margin: 'auto', marginRight: -50}}
             src={logo}
+            alt="logo"
           />
           <IconButton
             color="inherit"

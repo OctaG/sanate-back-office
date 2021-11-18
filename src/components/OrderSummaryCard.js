@@ -6,8 +6,6 @@ import Button from '@mui/material/Button';
 
 import ActionFinishedModal from '../components/ActionFinishedModal.js'
 
-import { useLocation } from "react-router-dom";
-
 import axios from 'axios';
 
 export default function OrderSummaryCard(props) {

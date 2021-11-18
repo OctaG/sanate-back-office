@@ -8,9 +8,7 @@ import axios from 'axios';
 
 export default function SpacingGrid(params) {
   const [rows, setRows] = useState([]);
-  
   useEffect(() => {
-    const rows = [];
     axios.get(
       `http://ec2-34-239-232-157.compute-1.amazonaws.com:3000/getProductsOfOrder`,
        { params: { id: params.orderID } }

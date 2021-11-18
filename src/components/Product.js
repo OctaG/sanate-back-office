@@ -11,7 +11,6 @@ export default function MediaCard(params) {
   const [rows, setRows] = useState([]);
 
   useEffect(() => {
-    const rows = [];
     axios.get(
       `http://ec2-34-239-232-157.compute-1.amazonaws.com:3000/getProductInfo`,
        { params: { id: params.id[0] } }

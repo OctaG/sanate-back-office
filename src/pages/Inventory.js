@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 
 import Typography from '@mui/material/Typography';
 
@@ -10,8 +10,6 @@ export default function OrderDetails() {
 
   const location = useLocation();
   const product = location.state.data;
-
-  const [rows, setRows] = useState([]);
 
   return(
     <React.Fragment>

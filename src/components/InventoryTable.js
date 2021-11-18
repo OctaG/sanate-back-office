@@ -1,13 +1,10 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import Paper from '@mui/material/Paper';
 import Container from '@mui/material/Container';
-import InputAdornment from '@mui/material/InputAdornment';
-import ImageList from '@mui/material/ImageList';
-import ImageListItem from '@mui/material/ImageListItem';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import Table from '@mui/material/Table';
@@ -15,10 +12,6 @@ import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import Modal from '@mui/material/Modal';
-
-import Dropdown from 'react-bootstrap/Dropdown';
-import DropdownButton from 'react-bootstrap/DropdownButton';
 
 import { useHistory } from "react-router-dom";
 
@@ -35,7 +28,7 @@ export default function InventoryTable(props) {
     e.preventDefault();
 
     Object.keys(props.product.inventory).map((key) => {
-      inventory.push([key, data.get('amount_'+ key)]);
+      return inventory.push([key, data.get('amount_'+ key)]);
     });
 
     axios({

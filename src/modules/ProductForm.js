@@ -1,6 +1,4 @@
-import React, { useState, useEffect } from 'react';
-
-import { styled } from '@mui/material/styles';
+import React, { useState } from 'react';
 
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
@@ -15,28 +13,10 @@ import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import Modal from '@mui/material/Modal';
-import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 import ActionFinishedModal from '../components/ActionFinishedModal.js'
 
 import axios from 'axios';
-
-const Input = styled('input')({
-  display: 'none',
-});
-
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
-  p: 4,
-};
 
 
 export default function ProductForm(params) {
@@ -53,7 +33,7 @@ export default function ProductForm(params) {
     e.preventDefault();
 
     Object.keys(params.product.inventory).map((key) => {
-      inventory.push([key, data.get('amount_'+ key)]);
+      return inventory.push([key, data.get('amount_'+ key)]);
     });
 
     axios({
@@ -80,7 +60,7 @@ export default function ProductForm(params) {
     e.preventDefault();
 
     sucursales.map((key) => {
-      inventory.push([key, data.get('amount_'+ key)]);
+      return inventory.push([key, data.get('amount_'+ key)]);
     });
 
     axios({
@@ -180,6 +160,7 @@ const changeImage = (value) => {
             <img
               style={{marginLeft: 30, height: 125, width: 125}}
               src={image}
+              alt="product_img"
             />
             </Grid>
             <TextField

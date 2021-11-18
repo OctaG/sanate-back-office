@@ -1,15 +1,10 @@
-import React, { useState } from 'react';
-
-import { styled } from '@mui/material/styles';
+import React from 'react';
 
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import Paper from '@mui/material/Paper';
 import Container from '@mui/material/Container';
-import InputAdornment from '@mui/material/InputAdornment';
-import ImageList from '@mui/material/ImageList';
-import ImageListItem from '@mui/material/ImageListItem';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import Table from '@mui/material/Table';
@@ -17,13 +12,7 @@ import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import AddCircleIcon from '@mui/icons-material/AddCircle';
 import Autocomplete from '@mui/material/Autocomplete';
-
-
-const Input = styled('input')({
-  display: 'none',
-});
 
 // Generate Order Data
 function createData(id, name) {
@@ -54,11 +43,6 @@ const rows = [
 ];
 
 export default function EditProductForm() {
-
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
-  const [price, setPrice] = useState(0);
-  const [images, setImages] = useState([])
 
   const top100Films = [
   { label: 'The Shawshank Redemption', year: 1994 },

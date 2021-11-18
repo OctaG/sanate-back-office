@@ -9,8 +9,6 @@ import OrderTable from '../components/OrderTable.js';
 import ProductTable from '../components/ProductTable.js';
 import Chart from '../components/Chart.js';
 
-import { useLocation } from "react-router-dom";
-
 export default function Home() {
   return (
     <React.Fragment>
