@@ -35,6 +35,8 @@ import Orders from "./Orders.js"
 import OrderDetails from "../pages/OrderDetails.js"
 import Home from "../pages/Home.js"
 
+import logo from '../assets/logo.png';
+
 import {
   BrowserRouter as Router,
   Switch,
@@ -127,7 +129,7 @@ const drawerIcons = [
 
 export default function NavBar() {
 
-    let history = useHistory();
+  let history = useHistory();
 
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -161,14 +163,22 @@ export default function NavBar() {
           >
             <MenuIcon />
           </IconButton>
+          <img
+            style={{height: 50, width: 500, margin: 'auto'}}
+            src={logo}
+          />
+          {/*
           <Typography variant="h6" noWrap component="div">
             Dashboard
           </Typography>
+          */}
+          {/*
           <IconButton color="inherit" sx={{marginLeft: "auto"}} onClick={goToOrders}>
             <Badge badgeContent={4} color="secondary">
               <NotificationsIcon />
             </Badge>
           </IconButton>
+          */}
         </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={open}>
