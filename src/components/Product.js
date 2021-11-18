@@ -16,6 +16,7 @@ export default function MediaCard(params) {
        { params: { id: params.id[0] } }
     )
          .then(res => {
+          console.log(res.data.Item);
           setRows(res.data.Item);
          });
   }, []);
@@ -36,7 +37,7 @@ export default function MediaCard(params) {
           ID: {rows.id}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          Sección: {rows.section}
+          Descripción: {rows.description}
         </Typography>
         <Typography variant="body2" color="text.secondary">
           Cantidad: {params.id[1]}

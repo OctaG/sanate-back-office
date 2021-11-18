@@ -33,7 +33,7 @@ export default function ProductTable(props) {
              let product = res.data.Items[index]
              rows.push(product);
            }
-            props.mini? setRows(rows.slice(0, 1)) : setRows(rows);
+            props.mini? setRows(rows.slice(0, 5)) : setRows(rows);
          });
   }, []);
 

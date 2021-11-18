@@ -24,7 +24,7 @@ export default function ProductForm(params) {
   const [image, setImage] = useState(params.edit? params.product.image : "");
   const [open, setOpen] = React.useState(false);
 
-  const sucursales = [["Polanco"], ["Interlomas"]]
+  const sucursales = [["Polanco"], ["Interlomas"], ["Condesa"], ["Tecamachalco"]];
 
   const editProduct = (e) => {
     const data = new FormData(e.currentTarget);
@@ -127,16 +127,6 @@ const changeImage = (value) => {
                   defaultValue={params.edit? params.product.description : ""}
                   variant="standard"
                   multiline
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  id="section"
-                  name="section"
-                  label="Sección"
-                  fullWidth
-                  defaultValue={params.edit? params.product.section : ""}
-                  variant="standard"
                 />
               </Grid>
               <Grid item xs={12}>
