@@ -14,16 +14,19 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
+import firebase from "../utils/firebase.js";
+
 const theme = createTheme();
 
 export default function LogIn() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
+    const email = data.get('email');
+    const password = data.get('password');
+    firebase.auth().signInWithEmailAndPassword(email, password)
+    .then((userCredential) => {
+      console.log("User logged");
     });
   };
 

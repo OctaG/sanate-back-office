@@ -26,6 +26,7 @@ import LocalHospitalIcon from '@mui/icons-material/LocalHospital';
 import StoreIcon from '@mui/icons-material/Store';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import Badge from '@mui/material/Badge';
+import Button from '@mui/material/Button';
 
 import ProductsTable from "../modules/ProductsTable.js"
 import EditProduct from "../pages/EditProduct.js"
@@ -35,6 +36,8 @@ import Orders from "./Orders.js"
 import OrderDetails from "../pages/OrderDetails.js"
 import Home from "../pages/Home.js"
 import Inventory from "../pages/Inventory.js"
+
+import firebase from "../utils/firebase.js";
 
 import logo from '../assets/logo.png';
 
@@ -147,6 +150,10 @@ export default function NavBar() {
     history.push("/orders")
   }
 
+  function logOut(){
+    firebase.auth().signOut();
+  }
+
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
@@ -165,9 +172,26 @@ export default function NavBar() {
             <MenuIcon />
           </IconButton>
           <img
-            style={{height: 50, width: 500, margin: 'auto'}}
+            style={{height: 50, width: 500, margin: 'auto', marginRight: -50}}
             src={logo}
           />
+          <IconButton
+            color="inherit"
+            aria-label="logout"
+            sx={{
+              marginLeft: 'auto',
+            }}
+          >
+            <Button
+              variant="contained"
+              color="secondary"
+              onClick={() => {
+                logOut()
+              }}
+            >
+              Salir
+            </Button>
+          </IconButton>
           {/*
           <Typography variant="h6" noWrap component="div">
             Dashboard
