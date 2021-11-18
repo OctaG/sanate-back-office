@@ -105,7 +105,12 @@ export default function ProductForm(params) {
   return (
     <React.Fragment>
       {open?
-        <ActionFinishedModal/>
+        <ActionFinishedModal
+          title={"¡Genial! La acción se ha completado con éxito"}
+          paragraph={"El producto se ha agregado a la tienda. Los clientes ya pueden acceder a él."}
+          buttonText={"Entiendo"}
+          nextLayout={"./products"}
+        />
         :
         null
       }

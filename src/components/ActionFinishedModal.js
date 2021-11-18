@@ -14,7 +14,7 @@ const style = {
   transform: 'translate(-50%, -50%)',
 };
 
-export default function BasicModal() {
+export default function ActionFinishedModal(props) {
   const history = useHistory();
   return (
     <div>
@@ -27,15 +27,19 @@ export default function BasicModal() {
         <Box sx={style}>
           <Paper sx={{p: 4, display: 'flex', flexDirection: 'column' }}>
             <Typography variant="h6" sx={{fontWeight:"bold"}}>
-              ¡Genial! La acción fue exitosa.
+              {props.title}
             </Typography>
             <Typography paragraph>
-              El producto se ha actualizado con exito. Los clientes
-              ya observan los nuevos cambios.
+              {props.paragraph}
             </Typography>
             <Box textAlign='right' sx={{marginTop:2, marginBottom:2}}>
-             <Button onClick={() => history.push("/products")} color="secondary" variant="contained" fullWidth>
-               Entiendo
+             <Button
+              onClick={() => history.push(props.nextLayout)}
+              variant="contained"
+              color="secondary"
+              fullWidth
+              >
+               {props.buttonText}
              </Button>
             </Box>
           </Paper>
