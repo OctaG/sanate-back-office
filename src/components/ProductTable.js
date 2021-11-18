@@ -83,7 +83,8 @@ export default function ProductTable(props) {
             <TableRow>
               <TableCell>ID</TableCell>
               <TableCell>Producto</TableCell>
-              <TableCell>Tipo</TableCell>
+              <TableCell>Imágen</TableCell>
+              <TableCell>Descripción</TableCell>
               <TableCell>Precio</TableCell>
               <TableCell align="right">Acciones</TableCell>
             </TableRow>
@@ -93,6 +94,13 @@ export default function ProductTable(props) {
               <TableRow key={row.id}>
                 <TableCell>{row.id}</TableCell>
                 <TableCell>{row.pname}</TableCell>
+                <TableCell>
+                  <img
+                    style={{marginLeft: 30, height: 50, width: 50}}
+                    src={row.image}
+                    alt="product_img"
+                  />
+                </TableCell>
                 <TableCell>{row.description}</TableCell>
                 <TableCell>{`$${row.price}`}</TableCell>
                 <TableCell align="right">
