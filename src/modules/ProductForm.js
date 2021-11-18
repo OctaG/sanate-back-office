@@ -44,7 +44,7 @@ const style = {
 
 export default function ProductForm(params) {
 
-  const [images, setImages] = useState([]);
+  const [image, setImage] = useState(params.edit? params.product.image : "");
   const [open, setOpen] = React.useState(false);
 
   const sucursales = [["Polanco"], ["Interlomas"]]
@@ -68,6 +68,7 @@ export default function ProductForm(params) {
         description: data.get('description'),
         price: data.get('price'),
         inventory: Object.fromEntries(inventory),
+        image: image,
       },
       headers:{ "Content-Type": "application/json" }
     }).then(() => {
@@ -94,6 +95,7 @@ export default function ProductForm(params) {
         description: data.get('description'),
         price: data.get('price'),
         inventory: Object.fromEntries(inventory),
+        image: image,
       },
       headers:{ "Content-Type": "application/json" }
     }).then(() => {
@@ -101,6 +103,10 @@ export default function ProductForm(params) {
     });
   };
 
+const changeImage = (value) => {
+  console.log(value);
+  setImage(value);
+};
 
   return (
     <React.Fragment>
@@ -149,6 +155,16 @@ export default function ProductForm(params) {
               </Grid>
               <Grid item xs={12}>
                 <TextField
+                  id="section"
+                  name="section"
+                  label="Sección"
+                  fullWidth
+                  defaultValue={params.edit? params.product.section : ""}
+                  variant="standard"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
                   id="price"
                   name="price"
                   label="Precio"
@@ -162,29 +178,24 @@ export default function ProductForm(params) {
               </Grid>
             </Grid>
             <Typography variant="h4" sx={{marginBottom:5}}>
-              Imágenes
+              Imágen
             </Typography>
             <Grid container spacing={3}>
-              <ImageList sx={{ width: 700, height: 150, marginLeft:3 }} cols={4} rowHeight={164}>
-                 {images.map((item) => (
-                   <ImageListItem key={item.img}>
-                     <img
-                       src={`${item.img}?w=164&h=164&fit=crop&auto=format`}
-                       srcSet={`${item.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
-                       alt={item.title}
-                     />
-                   </ImageListItem>
-                 ))}
-               </ImageList>
+            <img
+              style={{marginLeft: 30, height: 125, width: 125}}
+              src={image}
+            />
             </Grid>
-            <Box textAlign='right' sx={{marginBottom:2}}>
-              <label htmlFor="contained-button-file">
-                 <Input accept="image/*" id="contained-button-file" multiple type="file" />
-                 <Button color="secondary" component="span" endIcon={<AddCircleIcon/>}>
-                   Nueva imágen
-                 </Button>
-               </label>
-            </Box>
+            <TextField
+              id="image"
+              name="image"
+              label="URL de la imágen"
+              fullWidth
+              defaultValue={params.edit? image : ""}
+              variant="standard"
+              sx={{marginTop: 3, marginBottom: 5}}
+              onChange = {(e) => changeImage(e.target.value)}
+            />
             <Typography variant="h4" sx={{marginBottom:5}}>
               Inventario
             </Typography>

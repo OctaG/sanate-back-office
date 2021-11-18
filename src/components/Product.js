@@ -28,8 +28,8 @@ export default function MediaCard(params) {
     <Card sx={{ minWidth: 250, maxWidth: 350 }}>
       <CardMedia
         component="img"
-        height="140"
-        image="/static/images/cards/contemplative-reptile.jpg"
+        height="300"
+        image={rows.image}
         alt="green iguana"
       />
       <CardContent>
