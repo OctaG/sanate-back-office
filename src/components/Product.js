@@ -9,8 +9,6 @@ import axios from 'axios';
 
 export default function MediaCard(params) {
   const [rows, setRows] = useState([]);
-  console.log("Product ID: " + params.id[0]);
-  console.log("Cantidad: " + params.id[1]);
 
   useEffect(() => {
     const rows = [];
@@ -19,7 +17,6 @@ export default function MediaCard(params) {
        { params: { id: params.id[0] } }
     )
          .then(res => {
-          console.log(res.data.Item);
           setRows(res.data.Item);
          });
   }, []);

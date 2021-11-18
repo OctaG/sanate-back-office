@@ -21,7 +21,6 @@ export default function ActionFinishedModal(props) {
     <div>
       <Modal
         open={true}
-        onClose={console.log("Modal")}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >

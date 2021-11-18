@@ -24,10 +24,7 @@ export default function LogIn() {
     const data = new FormData(event.currentTarget);
     const email = data.get('email');
     const password = data.get('password');
-    firebase.auth().signInWithEmailAndPassword(email, password)
-    .then((userCredential) => {
-      console.log("User logged");
-    });
+    firebase.auth().signInWithEmailAndPassword(email, password);
   };
 
   return (

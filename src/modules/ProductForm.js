@@ -101,7 +101,6 @@ export default function ProductForm(params) {
   };
 
 const changeImage = (value) => {
-  console.log(value);
   setImage(value);
 };
 

@@ -48,17 +48,14 @@ export default function ProductTable(props) {
   }
 
   function goToEdit(row){
-    console.log(row);
     history.push("/edit-product", {data:row});
   }
 
   function goToInventory(row){
-    console.log(row);
     history.push("/inventory", {data:row});
   }
 
   function deleteProduct(row){
-    console.log(row);
     axios({
       method: "post",
       url: "http://ec2-34-239-232-157.compute-1.amazonaws.com:3000/deleteProduct",
