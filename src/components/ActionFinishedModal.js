@@ -1,4 +1,5 @@
-import * as React from 'react';
+import React from 'react';
+
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
@@ -16,7 +17,7 @@ const style = {
 
 export default function ActionFinishedModal(props) {
   const history = useHistory();
-  return (
+  return(
     <div>
       <Modal
         open={true}

@@ -6,7 +6,7 @@ import ProductForm from '../modules/ProductForm.js';
 
 import { useLocation } from "react-router-dom";
 
-export default function Orders() {
+export default function EditProduct() {
 
   const location = useLocation();
   const product = location.state.data;

@@ -9,6 +9,7 @@ import axios from 'axios';
 export default function SpacingGrid(params) {
   const [rows, setRows] = useState([]);
   console.log(params.orderID);
+
   useEffect(() => {
     const rows = [];
     axios.get(
@@ -20,6 +21,7 @@ export default function SpacingGrid(params) {
            setRows(res.data.Item.products);
          });
   }, []);
+  
   return(
     <Grid container rowSpacing={4} columnSpacing={4}>
       {Object.entries(rows).map((value) => (

@@ -5,10 +5,9 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 
-import Orders from '../components/Orders.js';
+import OrderTable from '../components/OrderTable.js';
+import ProductTable from '../components/ProductTable.js';
 import Chart from '../components/Chart.js';
-
-import ProductsTable from '../modules/ProductsTable.js';
 
 import { useLocation } from "react-router-dom";
 
@@ -31,10 +30,10 @@ export default function Home() {
         </Paper>
       </Grid>
       <Box sx={{marginBottom: 10}}>
-        <Orders mini/>
+        <OrderTable mini/>
       </Box>
       <Box sx={{marginBottom: 10}}>
-        <ProductsTable mini/>
+        <ProductTable mini/>
       </Box>
     </React.Fragment>
   );

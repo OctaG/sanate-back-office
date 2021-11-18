@@ -20,13 +20,11 @@ import { useHistory } from "react-router-dom";
 
 import axios from 'axios';
 
-
-
 function preventDefault(event) {
   event.preventDefault();
 }
 
-export default function Products(props) {
+export default function ProductTable(props) {
 
   const history = useHistory();
   const [rows, setRows] = useState([]);

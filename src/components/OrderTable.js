@@ -16,7 +16,7 @@ import { useHistory } from "react-router-dom";
 
 import axios from 'axios';
 
-export default function Orders(props) {
+export default function OrderTable(props) {
 
   let history = useHistory();
 
@@ -24,7 +24,9 @@ export default function Orders(props) {
 
   useEffect(() => {
     const rows = [];
-    axios.get(`http://ec2-34-239-232-157.compute-1.amazonaws.com:3000/getAllOrders`)
+    axios.get(
+      `http://ec2-34-239-232-157.compute-1.amazonaws.com:3000/getAllOrders`
+    )
          .then(res => {
            for(let elem in res.data.Items){
              rows.push(res.data.Items[elem]);

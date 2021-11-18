@@ -1,10 +1,8 @@
 import React, {useState, useEffect} from 'react';
 
 import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
 import axios from 'axios';
@@ -13,6 +11,7 @@ export default function MediaCard(params) {
   const [rows, setRows] = useState([]);
   console.log("Product ID: " + params.id[0]);
   console.log("Cantidad: " + params.id[1]);
+
   useEffect(() => {
     const rows = [];
     axios.get(
@@ -21,9 +20,10 @@ export default function MediaCard(params) {
     )
          .then(res => {
           console.log(res.data.Item);
-          setRows(res.data.Item)
+          setRows(res.data.Item);
          });
   }, []);
+
   return (
     <Card sx={{ minWidth: 250, maxWidth: 350 }}>
       <CardMedia

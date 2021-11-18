@@ -28,14 +28,15 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import Badge from '@mui/material/Badge';
 import Button from '@mui/material/Button';
 
-import ProductsTable from "../modules/ProductsTable.js"
-import EditProduct from "../pages/EditProduct.js"
+import ProductTable from "../components/ProductTable.js"
+import OrderTable from "../components/OrderTable.js"
+
 import UploadProduct from "../pages/UploadProduct.js"
 import CoordinateDelivery from "../pages/CoordinateDelivery.js"
-import Orders from "./Orders.js"
 import OrderDetails from "../pages/OrderDetails.js"
 import Home from "../pages/Home.js"
 import Inventory from "../pages/Inventory.js"
+import EditProduct from "../pages/EditProduct.js"
 
 import firebase from "../utils/firebase.js";
 
@@ -120,7 +121,7 @@ const menuOptions = [
   ['Resumen', '/'],
   ['Ordenes', 'orders'],
   ['Productos', 'products'],
-  ['Coordinar entregas', 'coordinate'],
+  /*['Coordinar entregas', 'coordinate']*/,
 ]
 
 
@@ -128,7 +129,7 @@ const drawerIcons = [
   <DashboardIcon/>,
   <ShoppingCartIcon/>,
   <LocalHospitalIcon/>,
-  <StoreIcon/>,
+  /*<StoreIcon/>*/,
 ]
 
 export default function NavBar() {
@@ -246,10 +247,10 @@ export default function NavBar() {
         <DrawerHeader />
         <Switch>
          <Route path="/products">
-          <ProductsTable/>
+          <ProductTable/>
          </Route>
          <Route path="/orders">
-          <Orders/>
+          <OrderTable/>
          </Route>
          <Route path="/edit-product">
           <EditProduct/>

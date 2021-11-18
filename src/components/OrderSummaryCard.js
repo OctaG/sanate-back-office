@@ -31,7 +31,7 @@ export default function OrderSummaryCard(props) {
   }
 
   return(
-    <>
+    <div>
       {open?
         <ActionFinishedModal
           title={"¡Genial! La acción se ha completado con éxito"}
@@ -59,6 +59,6 @@ export default function OrderSummaryCard(props) {
           Orden lista
         </Button>
       </Paper>
-    </>
+    </div>
   );
 }
