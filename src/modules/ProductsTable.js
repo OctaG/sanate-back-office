@@ -26,7 +26,7 @@ function preventDefault(event) {
   event.preventDefault();
 }
 
-export default function Products() {
+export default function Products(props) {
 
   const history = useHistory();
   const [rows, setRows] = useState([]);
@@ -41,7 +41,7 @@ export default function Products() {
              let product = res.data.Items[index]
              rows.push(product);
            }
-           setRows(rows);
+            props.mini? setRows(rows.slice(0, 1)) : setRows(rows);
          });
   }, []);
 

@@ -33,6 +33,7 @@ import UploadProduct from "../pages/UploadProduct.js"
 import CoordinateDelivery from "../pages/CoordinateDelivery.js"
 import Orders from "./Orders.js"
 import OrderDetails from "../pages/OrderDetails.js"
+import Home from "../pages/Home.js"
 
 import {
   BrowserRouter as Router,
@@ -226,6 +227,9 @@ export default function NavBar() {
          </Route>
          <Route path="/coordinate">
           <CoordinateDelivery/>
+         </Route>
+         <Route path="/">
+          <Home/>
          </Route>
         </Switch>
       </Box>

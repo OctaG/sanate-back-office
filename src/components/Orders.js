@@ -16,7 +16,7 @@ import { useHistory } from "react-router-dom";
 
 import axios from 'axios';
 
-export default function Orders() {
+export default function Orders(props) {
 
   let history = useHistory();
 
@@ -29,7 +29,7 @@ export default function Orders() {
            for(let elem in res.data.Items){
              rows.push(res.data.Items[elem]);
            }
-           setRows(rows);
+           props.mini? setRows(rows.slice(0, 5)) : setRows(rows);
          });
   }, []);
 
